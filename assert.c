@@ -6,18 +6,34 @@
 /*   By: rploeger <rploeger@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 14:29:22 by rploeger          #+#    #+#             */
-/*   Updated: 2025/11/26 08:43:05 by rploeger         ###   ########.fr       */
+/*   Updated: 2025/11/26 10:07:13 by rploeger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <assert.h>
 #include <stdio.h>
-#include <stdlib.h>
 #include <unistd.h>
 #include "../list.h"
 #include "../push_swap.h"
 #include "../libft/libft.h"
 
+void	list_print(t_list *head)
+{
+	t_list	*start;
+
+	if (!head)
+		return;
+	start = head;
+	while (1)
+	{
+		ft_putnbr_fd(head->value, STDOUT_FILENO);
+		head = head->next;
+		if (head == start)
+			break;
+		ft_putchar_fd(' ', STDOUT_FILENO);
+	}
+	ft_putchar_fd('\n', STDOUT_FILENO);
+}
 
 void debug_print_impl(const char *file, int line, const char *msg)
 {

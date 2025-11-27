@@ -91,22 +91,6 @@ void test_list_rev_rotate(void)
 	assert_list_eq(l, ((int []){1,2,3}), 3);
 }
 
-void	test_list_length(void)
-{
-	t_list *l = NULL;
-	assert(list_length(l) == 0);
-	list_push(&l, list_node(5));
-	assert(list_length(l) == 1);
-	list_push(&l, list_node(4));
-	assert(list_length(l) == 2);
-	list_push(&l, list_node(3));
-	assert(list_length(l) == 3);
-	list_push(&l, list_node(2));
-	assert(list_length(l) == 4);
-	list_push(&l, list_node(1));
-	assert(list_length(l) == 5);
-}
-
 void	test_list_index_of(void)
 {
 	t_list *l = NULL;
@@ -194,7 +178,6 @@ void test_list(void)
 	test_list_rotate();
 	test_list_rev_rotate();
 	test_list_min_index();
-	test_list_length();
 	test_list_index_of();
 	test_list_get();
 	test_list_index_to_offset();

@@ -35,7 +35,6 @@ $(LIBFT):
 
 clean:
 	@echo "Removing .o files" 
-	@rm -f $(OBJS)
 
 fclean: clean
 	@echo "Removing output files" 

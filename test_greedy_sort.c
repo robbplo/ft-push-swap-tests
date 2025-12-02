@@ -6,7 +6,7 @@
 /*   By: rploeger <rploeger@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 14:59:21 by rploeger          #+#    #+#             */
-/*   Updated: 2025/11/27 12:08:24 by rploeger         ###   ########.fr       */
+/*   Updated: 2025/11/27 13:06:49 by rploeger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,35 +157,41 @@ void	test_min_ops(void)
 	s.min_ops_len = INT_MAX;
 	s.curr_ops = calloc(OPS_SIZE, sizeof(t_op));
 	s.min_ops = calloc(OPS_SIZE, sizeof(t_op));
+	s.a_len = 10;
+	s.b_len = 5;
 
-	// assert_ops_eq(
-	// 	min_ops(&s, 9, 4, 10, 5),
-	// 	(t_op[]){RRR},
-	// 	1
-	// );
-	// assert(s.min_ops_len == 1);
+	assert_ops_eq(
+		min_ops(&s, 9, 4),
+		(t_op[]){RRR},
+		1
+	);
+	assert(s.min_ops_len == 1);
 	reset_state(&s);
 	assert_ops_eq(
-		min_ops(&s, 1, 4, 10, 5),
+		min_ops(&s, 1, 4),
 		(t_op[]){RA, RRB},
 		2
 	);
 	reset_state(&s);
 	assert_ops_eq(
-		min_ops(&s, 0, 0, 10, 5),
+		min_ops(&s, 0, 0),
 		(t_op[]){},
 		0
 	);
 	reset_state(&s);
 	// place at the end
+	s.a_len = 1;
+	s.b_len = 3;
 	assert_ops_eq(
-		min_ops(&s, 0, 3, 1, 3),
+		min_ops(&s, 0, 3),
 		(t_op[]){RRB},
 		1
 	);
 	reset_state(&s);
+	s.a_len = 2;
+	s.b_len = 2;
 	assert_ops_eq(
-		min_ops(&s, 0, 1, 2, 2),
+		min_ops(&s, 0, 1),
 		(t_op[]){RB},
 		1
 	);

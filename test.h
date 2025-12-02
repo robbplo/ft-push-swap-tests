@@ -6,7 +6,7 @@
 /*   By: rploeger <rploeger@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 14:57:44 by rploeger          #+#    #+#             */
-/*   Updated: 2025/11/24 13:09:07 by rploeger         ###   ########.fr       */
+/*   Updated: 2025/12/02 17:24:20 by rploeger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,3 +26,4 @@ void	assert_ops_eq(t_op *ops, t_op arr[], int size);
 void	test_list(void);
 void	test_selection_sort(void);
 void	test_greedy_sort(void);
+void	test_short_sort(void);

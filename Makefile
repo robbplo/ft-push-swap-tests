@@ -2,7 +2,7 @@ CC = cc
 CFLAGS = -g -Wall -Werror -Wextra -I../libft
 LDFLAGS = -L../libft -lft
 NAME = push_swap
-SRCS = $(shell find .. -maxdepth 1 -name '*.c' | grep -v main)
+SRCS = $(shell find .. -maxdepth 1 -name '*.c' | grep -v main | grep -v checker)
 
 LIBFT = "libft/libft.a"
 

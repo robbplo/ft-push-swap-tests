@@ -6,7 +6,7 @@
 /*   By: rploeger <rploeger@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 14:59:21 by rploeger          #+#    #+#             */
-/*   Updated: 2025/11/27 13:06:49 by rploeger         ###   ########.fr       */
+/*   Updated: 2025/12/02 17:19:17 by rploeger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,7 +150,7 @@ void	test_ops_to_move()
 	free(s.min_ops);
 }
 
-void	test_min_ops(void)
+void	test_find_cheapest_moves(void)
 {
 	t_state s;
 	bzero(&s, sizeof(t_state));
@@ -161,20 +161,20 @@ void	test_min_ops(void)
 	s.b_len = 5;
 
 	assert_ops_eq(
-		min_ops(&s, 9, 4),
+		find_cheapest_moves(&s, 9, 4),
 		(t_op[]){RRR},
 		1
 	);
 	assert(s.min_ops_len == 1);
 	reset_state(&s);
 	assert_ops_eq(
-		min_ops(&s, 1, 4),
+		find_cheapest_moves(&s, 1, 4),
 		(t_op[]){RA, RRB},
 		2
 	);
 	reset_state(&s);
 	assert_ops_eq(
-		min_ops(&s, 0, 0),
+		find_cheapest_moves(&s, 0, 0),
 		(t_op[]){},
 		0
 	);
@@ -183,7 +183,7 @@ void	test_min_ops(void)
 	s.a_len = 1;
 	s.b_len = 3;
 	assert_ops_eq(
-		min_ops(&s, 0, 3),
+		find_cheapest_moves(&s, 0, 3),
 		(t_op[]){RRB},
 		1
 	);
@@ -191,7 +191,7 @@ void	test_min_ops(void)
 	s.a_len = 2;
 	s.b_len = 2;
 	assert_ops_eq(
-		min_ops(&s, 0, 1),
+		find_cheapest_moves(&s, 0, 1),
 		(t_op[]){RB},
 		1
 	);
@@ -261,7 +261,7 @@ void	test_greedy_sort(void)
 {
 	test_correct_index_desc();
 	test_ops_to_move();
-	test_min_ops();
+	test_find_cheapest_moves();
 	four_low_numbers_greedy();
 	four_high_numbers_greedy();
 	four_sorted_rotated_greedy();

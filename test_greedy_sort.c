@@ -6,7 +6,7 @@
 /*   By: rploeger <rploeger@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 14:59:21 by rploeger          #+#    #+#             */
-/*   Updated: 2025/12/02 17:19:17 by rploeger         ###   ########.fr       */
+/*   Updated: 2025/12/03 09:13:16 by rploeger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,53 +29,47 @@ static void	reset_state(t_state *s)
 	bzero(s->min_ops, OPS_SIZE * sizeof(t_op));
 }
 
-void	test_correct_index_desc(void)
+void	test_correct_index_asc(void)
 {
 	t_state s;
 	bzero(&s, sizeof(t_state));
-	list_push_back(&s.b, list_node(5));
-	list_push_back(&s.b, list_node(3));
-	list_push_back(&s.b, list_node(1));
-	s.b_len = 3;
-	// l: 5 3 1
-	assert(correct_index_desc(&s, 42) == 0);
-	assert(correct_index_desc(&s, 6) == 0);
-	assert(correct_index_desc(&s, 5) == 0);
-	assert(correct_index_desc(&s, 4) == 1);
-	assert(correct_index_desc(&s, 3) == 1);
-	assert(correct_index_desc(&s, 2) == 2);
-	assert(correct_index_desc(&s, 1) == 0);
-	assert(correct_index_desc(&s, 0) == 0);
-	assert(correct_index_desc(&s, -1) == 0);
-	list_rotate(&s.b);
-	// l: 3 1 5
-	assert(correct_index_desc(&s, 42) == 2);
-	assert(correct_index_desc(&s, 6) == 2);
-	assert(correct_index_desc(&s, 5) == 0);
-	assert(correct_index_desc(&s, 4) == 0);
-	assert(correct_index_desc(&s, 3) == 0);
-	assert(correct_index_desc(&s, 2) == 1);
-	assert(correct_index_desc(&s, 1) == 1);
-	assert(correct_index_desc(&s, 0) == 2);
-	assert(correct_index_desc(&s, -1) == 2);
-	list_rotate(&s.b);
-	// l: 1 5 3
-	assert(correct_index_desc(&s, 42) == 1);
-	assert(correct_index_desc(&s, 6) == 1);
-	assert(correct_index_desc(&s, 5) == 1);
-	assert(correct_index_desc(&s, 4) == 2);
-	assert(correct_index_desc(&s, 3) == 0);
-	assert(correct_index_desc(&s, 2) == 0);
-	assert(correct_index_desc(&s, 1) == 0);
-	assert(correct_index_desc(&s, 0) == 1);
-	assert(correct_index_desc(&s, -1) == 1);
-	list_rotate(&s.b);
-	// l: 5 3 1
-	free(list_pop(&s.b));
-	s.b_len--;
-	list_swap(&s.b);
-	// l: 1 3
-	assert(correct_index_desc(&s, 2) == 0);
+	list_push_back(&s.a, list_node(1));
+	list_push_back(&s.a, list_node(3));
+	list_push_back(&s.a, list_node(5));
+	s.a_len = 3;
+	// l: 1 3 5
+	assert(correct_index_asc(&s, 42) == 0);
+	assert(correct_index_asc(&s, 6) == 0);
+	assert(correct_index_asc(&s, 5) == 0);
+	assert(correct_index_asc(&s, 4) == 2);
+	assert(correct_index_asc(&s, 3) == 1);
+	assert(correct_index_asc(&s, 2) == 1);
+	assert(correct_index_asc(&s, 1) == 0);
+	assert(correct_index_asc(&s, 0) == 0);
+	assert(correct_index_asc(&s, -1) == 0);
+	list_rotate(&s.a);
+	// l: 3 5 1
+	assert(correct_index_asc(&s, 42) == 2);
+	assert(correct_index_asc(&s, 6) == 2);
+	assert(correct_index_asc(&s, 5) == 1);
+	assert(correct_index_asc(&s, 4) == 1);
+	assert(correct_index_asc(&s, 3) == 0);
+	assert(correct_index_asc(&s, 2) == 0);
+	assert(correct_index_asc(&s, 1) == 0);
+	assert(correct_index_asc(&s, 0) == 2);
+	assert(correct_index_asc(&s, -1) == 2);
+	list_rotate(&s.a);
+	// l: 5 1 3
+	assert(correct_index_asc(&s, 42) == 1);
+	assert(correct_index_asc(&s, 6) == 1);
+	assert(correct_index_asc(&s, 5) == 0);
+	assert(correct_index_asc(&s, 4) == 0);
+	assert(correct_index_asc(&s, 3) == 0);
+	assert(correct_index_asc(&s, 2) == 2);
+	assert(correct_index_asc(&s, 1) == 1);
+	assert(correct_index_asc(&s, 0) == 1);
+	assert(correct_index_asc(&s, -1) == 1);
+	list_delete(s.a);
 }
 
 void	test_ops_to_move()
@@ -259,7 +253,7 @@ void	six_three_digits_greedy()
 
 void	test_greedy_sort(void)
 {
-	test_correct_index_desc();
+	test_correct_index_asc();
 	test_ops_to_move();
 	test_find_cheapest_moves();
 	four_low_numbers_greedy();

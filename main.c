@@ -16,7 +16,7 @@
 int	main(void)
 {
 	test_list();
-	test_greedy_sort();
 	test_short_sort();
+	test_greedy_sort();
 	printf("All tests passed!\n");
 }
